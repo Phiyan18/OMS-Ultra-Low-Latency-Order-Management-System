@@ -13,7 +13,6 @@ A **C++17 order management system** with an interactive desktop-style console UI
 | **Quant / systematic traders** | Prototype signal → execution loops: OBI, VPIN, momentum, composite alpha, and a simple backtest with cost sensitivity before wiring a production stack. |
 | **Market microstructure researchers** | Study price-time FIFO matching, L2 depth, alpha decay (IC vs horizon), and WAL-auditable state reconstruction. |
 | **C++ / HFT engineers** | Learn patterns used in production: pool allocators, SPSC queues, double-buffered snapshots, fixed-point prices, and sub-microsecond book ops (Release builds). |
-| **Students & portfolio builders** | A complete, visual, documented codebase suitable for interviews, theses, or extending into a full trading simulator. |
 
 ---
 
@@ -40,8 +39,6 @@ A **C++17 order management system** with an interactive desktop-style console UI
 | Distributed deployment | Partition by symbol; keep one consumer per book shard |
 
 ---
-
-## Screenshots & Visuals
 
 ### Interactive console (menu option 1)
 
@@ -198,34 +195,6 @@ cmake --build build
 
 ---
 
-## Architecture
-
-```
-┌─────────────────── Producer Thread(s) ───────────────────┐
-│  submit_add / submit_cancel / submit_modify              │
-│           │ lock-free SPSC push                          │
-└───────────┼──────────────────────────────────────────────┘
-            ▼
-┌─────────────────── Consumer Thread ──────────────────────┐
-│  OmsEngine::process_all()                                │
-│    ├── MatchingEngine (price-time FIFO)                  │
-│    ├── OrderBook L3 (O(1) add/modify/cancel/execute)     │
-│    └── WalWriter (64-byte fixed records)                 │
-├──────────────────────────────────────────────────────────┤
-│  L2BookView — double-buffered atomic snapshot (readers)  │
-├──────────────────────────────────────────────────────────┤
-│  Signals: OBI | VPIN | Momentum | Composite              │
-│  Backtest: Alpha Decay IC | Sharpe | Cost Sensitivity    │
-└──────────────────────────────────────────────────────────┘
-            │
-            ▼ replay
-┌─────────────────── WalReplayer ──────────────────────────┐
-│  Rebuild book state from oms.wal                         │
-└──────────────────────────────────────────────────────────┘
-```
-
----
-
 ## Features
 
 | Feature | Implementation |
@@ -356,7 +325,3 @@ cmake --install build --prefix /usr/local
 This project is for **research, education, and prototyping**. It is not production trading software. No warranty; use at your own risk. Not financial advice.
 
 ---
-
-## License
-
-MIT
