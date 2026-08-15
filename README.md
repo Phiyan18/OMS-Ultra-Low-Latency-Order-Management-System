@@ -152,11 +152,6 @@ cmake --build build
 # Interactive menu (recommended first run)
 ./build/oms
 
-# Full automated demo + HTML report (CI, demos, sharing)
-./build/oms --showcase
-./build/oms --showcase --report /path/to/report.html
-```
-
 **Windows:** `build\oms.exe` or `build\Release\oms.exe` (VS).
 
 > **MinGW / MSYS2:** Add `C:\msys64\ucrt64\bin` to your `PATH` (or run from the **UCRT64** shell) so `libgcc_s_seh-1.dll` and related runtime DLLs are found.
@@ -178,20 +173,6 @@ cmake --build build
 
 ---
 
-## Menu Guide
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| **1** | Live Trading Desk | Simulated order flow with refreshing L2 ladder and signals |
-| **2** | Matching Engine | Aggressive order crosses resting liquidity; prints trades |
-| **3** | SPSC + WAL | Producer/consumer threads, `oms.wal` log, replay verification |
-| **4** | Alpha Decay | IC vs horizon from 10 ms to 10 s |
-| **5** | Quick Benchmark | ~50k ops timing for add/cancel/best |
-| **6** | Full Showcase | Runs key demos and writes `oms_report.html` |
-| **7** | NASDAQ Replay | LOBSTER CSV → L3 book + signals + `oms_replay_report.html` |
-| **8** | Binance Trades | Real BTC trade tape → VPIN / momentum sparklines |
-| **9** | Data Setup | Verify files + download instructions |
-| **0** | Exit | |
 
 ---
 
@@ -212,31 +193,7 @@ cmake --build build
 
 ---
 
-## Project Layout
 
-```
-include/
-├── book/           OrderBook, L2BookView, Trade
-├── engine/         MatchingEngine, OmsEngine
-├── io/             OrderCommand, WalWriter, LobsterFeed, BinanceTrades, MarketReplay
-├── analytics/      MarketStats, VolumeProfile
-├── queue/          SPSCQueue
-├── memory/         PoolAllocator
-├── signals/        OBI, VPIN, Momentum, Composite
-├── backtest/       AlphaDecay, BacktestEngine
-├── app/            real_data_modes.hpp
-└── ui/             console_visual.hpp, html_report.hpp
-data/
-├── lobster/        LOBSTER-format NASDAQ message CSVs
-└── binance/        Binance daily trade CSVs (after fetch)
-scripts/            fetch_market_data.ps1 / .sh, generate_lobster_sample.py
-src/
-└── oms_main.cpp    Unified product entry point
-benchmarks/         oms_benchmark (dev)
-tests/              oms_test (dev)
-```
-
----
 
 ## API Examples
 
@@ -275,30 +232,6 @@ oms::WalWriter wal("oms.wal");
 engine.submit_add(id, oms::Side::Bid, price, qty);  // producer
 engine.process_all(&wal);                            // consumer
 ```
-
----
-
-## Performance Targets (Release, bare metal)
-
-| Operation | Target |
-|-----------|--------|
-| Order insert | ~80 ns |
-| Cancel | ~45 ns |
-| Best bid/ask | ~12 ns |
-| Throughput | ~12M ops/sec |
-
-Always benchmark with **Release** builds. Debug builds are 10–50× slower.
-
----
-
-## Price Format
-
-Prices are **fixed-point `int64_t`**: multiply dollars by `10_000`.
-
-| Display | Internal |
-|---------|----------|
-| $100.00 | `1'000'000` |
-| $100.01 | `1'000'100` |
 
 ---
 
