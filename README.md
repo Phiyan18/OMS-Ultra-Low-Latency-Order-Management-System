@@ -5,9 +5,11 @@ A **C++17 order management system** with an interactive desktop-style console UI
 **Shippable product:** one executable — `oms.exe` (Windows) or `oms` (Linux/macOS) — no Python, no separate demo binaries required.
 
 ---
-##Running
+## Running
 
+<img width="1920" height="1004" alt="Recording 2026-08-15 180612" src="https://github.com/user-attachments/assets/3a245a7e-d7d4-4741-8245-1c9edc1e9598" />
 
+---
 
 ## Who Is This For?
 
@@ -40,8 +42,6 @@ A **C++17 order management system** with an interactive desktop-style console UI
 | Persistence / compliance | Extend `WalWriter` / `WalReplayer` record types |
 | GUI or web dashboard | Consume L2 snapshots from `L2BookView` or parse `oms_report.html` |
 | Distributed deployment | Partition by symbol; keep one consumer per book shard |
-
----
 
 ---
 
