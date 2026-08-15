@@ -5,6 +5,9 @@ A **C++17 order management system** with an interactive desktop-style console UI
 **Shippable product:** one executable — `oms.exe` (Windows) or `oms` (Linux/macOS) — no Python, no separate demo binaries required.
 
 ---
+##Running
+
+
 
 ## Who Is This For?
 
@@ -40,28 +43,9 @@ A **C++17 order management system** with an interactive desktop-style console UI
 
 ---
 
-### Interactive console (menu option 1)
-
-- Animated **bid/ask ladder** with depth bars  
-- **OBI / VPIN / momentum / composite** bar gauges  
-- **Sparkline** of composite signal over the session  
-
-Requires a terminal with **ANSI color** support (Windows Terminal, VS Code terminal, iTerm2, any modern Linux console).
-
-### HTML report (menu option 6 or `--showcase`)
-
-Generates **`oms_report.html`** in the project directory:
-
-- Backtest metrics (Sharpe, return, drawdown)  
-- Final L2 depth table with bar widths  
-- Alpha decay table (IC vs horizon)  
-- SVG chart of composite signal  
-
-Open the file in any browser — no server needed.
-
 ---
 
-## Real Market Data (NEW)
+## Real Market Data 
 
 OMS replays **real exchange data** — not just synthetic RNG feeds.
 
@@ -170,10 +154,6 @@ Legacy standalone demos (`oms_demo`, `oms_matching_demo`) are available with:
 cmake -B build -DOMS_BUILD_LEGACY_DEMOS=ON
 cmake --build build
 ```
-
----
-
-
 ---
 
 ## Features
@@ -192,8 +172,6 @@ cmake --build build
 | Visuals | ANSI console UI + HTML report |
 
 ---
-
-
 
 ## API Examples
 
