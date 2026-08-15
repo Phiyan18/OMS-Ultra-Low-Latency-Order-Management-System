@@ -7,7 +7,7 @@ A **C++17 order management system** with an interactive desktop-style console UI
 ---
 ## Running
 
-<img width="1920" height="1004" alt="Recording 2026-08-15 180612" src="https://github.com/user-attachments/assets/3a245a7e-d7d4-4741-8245-1c9edc1e9598" />
+<img width="1920" height="1004" alt="oms" src="https://github.com/user-attachments/assets/5e5dcc81-c234-4741-ae48-396577746921" />
 
 ---
 
